@@ -1,14 +1,14 @@
 import {useState} from "react";
-import {useDispatch} from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
 
 import {Button, Input, SelectPriority, SwitchToggle} from "../../shared/ui";
-import {addTodos} from "../../redux/slice/todoSlice.js";
+import {addTask} from "../../redux/slice/todoSlice.js";
 
 import style from './style.module.scss';
 
 export const Popup = ({handleTogglePopup, setTogglePopup}) => {
     const dispatch = useDispatch();
-
+    const userId = useSelector(state => state.auth.userId);
     // настройка input
     const [textInput, setInputText] = useState('');
 
@@ -29,9 +29,10 @@ export const Popup = ({handleTogglePopup, setTogglePopup}) => {
         const newTask = {
             name: textInput,
             priority: priority,
+            userId
         }
 
-        dispatch(addTodos(newTask));
+        dispatch(addTask(newTask));
         setInputText(''); // обнуление input
         setPriority('') // обнуление select
 

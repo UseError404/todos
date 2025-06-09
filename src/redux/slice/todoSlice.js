@@ -1,36 +1,52 @@
 import {createSlice} from "@reduxjs/toolkit";
-// import { TodoService } from "../../services/db";
+
+const getTasksFromStorage = (userId) => {
+    const data = localStorage.getItem(`todos_${userId}`);
+    return data ? JSON.parse(data) : [];
+}
+
+const saveTasksToStorage = (userId, tasks) => {
+    localStorage.setItem(`todos_${userId}`, JSON.stringify(tasks));
+}
+
 
 export const todosSlice = createSlice({
     name: 'todos',
     initialState: {
-        todos: [],
-        // loading: false,
+        items: [],
+        loading: false,
     },
     reducers: {
-   /*     setTodos(state, action) {
-            state.todos = action.payload;
+        setTasks: (state, action) => {
+            state.items = action.payload;
         },
-        setLoading(state, action) {
-            state.loading = action.payload;
-        }
-        */
-        addTodos(state, action) {
-            state.todos.push({
-                id: new Date().toISOString(),
+        addTask: (state, action) => {
+            const newTask = {
+                id: Date.now().toString(),
                 name: action.payload.name,
-                completed: false,
                 priority: action.payload.priority || '',
-            })
-        },
-        removeTodos(state, action) {
-            state.todos = state.todos.filter(todo => todo.id !== action.payload.id);
-        },
-        removeAllTodos(state, action) {
-            state.todos = [];
-        },
-    }
-})
+                completed: false,
+                createdAt: new Date().toISOString()
+            };
 
-export const {addTodos, removeAllTodos, removeTodos} = todosSlice.actions;
+            state.items.push(newTask);
+            saveTasksToStorage(action.payload.userId, state.items);
+        },
+        removeTask:(state, action) => {
+            state.items = state.items.filter(todo => todo.id !== action.payload.id);
+            saveTasksToStorage(action.payload.userId, state.items);
+        },
+        clearCompleted: (state, action) => {
+            state.items = state.items.filter(task => !task.completed);
+            saveTasksToStorage(action.payload.userId, state.items);
+        }
+    }
+});
+// Асинхронные actions
+export const loadTasks = (userId) => (dispatch) => {
+    const tasks = getTasksFromStorage(userId);
+    dispatch(todosSlice.actions.setTasks(tasks));
+};
+
+export const { setTasks, addTask, removeTask, clearCompleted } = todosSlice.actions;
 export default todosSlice.reducer;

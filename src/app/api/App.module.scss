@@ -1,10 +1,14 @@
+@use "@scss/variables" as var;
+
 body{
   background-color: var(--bg-color1);
 }
 
 .todos {
   display: flex;
-  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+  gap: 15px;
 
   width: 100vw;
   min-height: 100vh;
@@ -12,6 +16,11 @@ body{
   padding: 20px 60px;
   box-sizing: border-box;
   position: relative;
+  transition: all .3s ease;
+
+  @media (max-width: map-get(var.$breakpoints, 'lg')) {
+    padding: 20px 20px;
+  }
 
   &::after,
   &::before {
@@ -39,7 +48,7 @@ body{
 .container {
   max-width: 1440px;
   width: 100%;
-  min-height: 70vh;
+  min-height: 85vh;
 
   position: relative;
   box-shadow:
@@ -64,4 +73,17 @@ body{
 }
 
 .openPopup {
+}
+
+.authScreen {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  width: 100vw;
+  height: 100vh;
+
+  .loginButton {
+    width: 18rem;
+  }
 }

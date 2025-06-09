@@ -1,3 +1,5 @@
+@use "@scss/variables" as var;
+
 .themeToggle {
   position: fixed;
   bottom: 10px;
@@ -7,6 +9,9 @@
   transition: all .4s ease;
   max-width: 40px;
   max-height: 40px;
+  @media (max-width: map-get(var.$breakpoints, 'lg')) {
+    position: absolute;
+  }
 }
 
 .stSunMoonThemeToggleBtn {

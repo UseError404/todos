@@ -1,10 +1,12 @@
-import {configureStore} from "@reduxjs/toolkit";
-import {todosSlice} from "./slice/todoSlice.js";
-import {sortSlice} from "./slice/sortSlice.js";
+import { configureStore } from "@reduxjs/toolkit";
+import todosReducer from "./slice/todoSlice";
+import sortReducer from "./slice/sortSlice";
+import authReducer from "./slice/authSlice";
 
 export const store = configureStore({
     reducer: {
-        todos: todosSlice.reducer,
-        sort: sortSlice.reducer,
+        todos: todosReducer,
+        sort: sortReducer,
+        auth: authReducer
     }
-})
+});
