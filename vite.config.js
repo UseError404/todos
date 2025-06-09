@@ -4,7 +4,7 @@ import path from 'path';
 // https://vite.dev/config/
 export default defineConfig({
   plugins: [react()],
-  base: '/',
+  base: '/todos/',
   resolve: {
     alias: {
       '@scss': path.resolve(__dirname, './src/shared/styles')
