@@ -1,0 +1,68 @@
+@use "@scss/variables" as var;
+
+.taskList {
+  display: flex;
+  flex-direction: column;
+  gap: 25px;
+
+  width: 100%;
+  list-style: none;
+
+  .taskItem {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 25px;
+
+    width: 100%;
+    padding: 30px 20px;
+    border-radius: 20px;
+    box-shadow: -3px -3px 6px 0 rgba(0, 0, 0, 0.3);
+    background-color: var(--opasityDrk);
+
+    font-family: "Roboto Mono", monospace;
+    color: var(--dark);
+    font-size: 18px;
+    font-weight: 700;
+  }
+
+ .containerTask {
+   display: flex;
+   align-items: center;
+   gap: 20px;
+ }
+
+  .taskPriority {
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+
+    min-width: 25px;
+    min-height: 25px;
+    width: 25px;
+    height: 25px;
+    border-radius: 50%;
+    box-shadow: -2px -2px 4px 0 rgba(0, 0, 0, 0.4);
+
+    &.green {background-color: var(--green);}
+    &.yellow {background-color: var(--yellow);}
+    &.red {background-color: var(--red);}
+    &.blue {background-color: var(--blue);}
+  }
+
+  .taskName {
+    font-family: "Roboto Mono", monospace;
+    color: var(--white);
+    font-size: 16px;
+    font-weight: 400;
+
+    overflow-wrap: anywhere;
+    max-width: 500px;
+  }
+}
+
+.sortButton {
+  position: absolute;
+  right: 40px;
+}
+.deleteTask {}

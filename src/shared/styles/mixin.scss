@@ -1,0 +1,32 @@
+/// Адаптивный текст с автоматической линией высоты
+/// @param {Number} $min-size - Минимальный размер (px)
+/// @param {Number} $max-size - Максимальный размер (px)
+/// @param {Number} $min-width [375px] - Минимальная ширина вьюпорта
+/// @param {Number} $max-width [1440px] - Максимальная ширина вьюпорта
+/// @param {Number|String} $line-height [1.2] - Коэффициент или фиксированное значение
+@mixin fluid-type($min-size, $max-size, $min-width: 375px, $max-width: 1440px, $line-height: 1.2) {
+  $unit: unit($min-size);
+
+  // Расчет размера
+  font-size: clamp(
+          #{$min-size},
+          calc(#{$min-size} + (#{strip-unit($max-size)} - #{strip-unit($min-size)}) * ((100vw - #{$min-width}) / (#{strip-unit($max-width)} - #{strip-unit($min-width)}))),
+          #{$max-size}
+  );
+
+  // Автоматическая линия высоты
+  @if unitless($line-height) {
+    line-height: $line-height;
+  } @else {
+    line-height: clamp(
+            #{$min-size * $line-height},
+            calc(#{$min-size * $line-height} + (#{strip-unit($max-size * $line-height)} - #{strip-unit($min-size * $line-height)}) * ((100vw - #{$min-width}) / (#{strip-unit($max-width)} - #{strip-unit($min-width)}))),
+            #{$max-size * $line-height}
+    );
+  }
+}
+
+// Вспомогательная функция для удаления единиц измерения
+@function strip-unit($value) {
+  @return $value / ($value * 0 + 1);
+}

@@ -1,0 +1,55 @@
+.formControl {
+  position: relative;
+  margin: 20px 0 40px;
+  min-width: 190px;
+
+  .input {
+    background-color: transparent;
+    border: 0;
+    border-bottom: 2px var(--white) solid;
+    display: block;
+    padding: 15px 0;
+    //width: 100%;
+
+    font-family: "Roboto Mono", monospace;
+    font-size: 18px;
+    font-weight: 900;
+    font-style: normal;
+    color: var(--yellow);
+
+    &:focus,
+    &:valid {
+      outline: 0;
+      border-bottom-color: var(--yellow);
+    }
+  }
+
+  label {
+    position: absolute;
+    top: 15px;
+    left: 0;
+    pointer-events: none;
+
+    span {
+      display: inline-block;
+      min-width: 5px;
+      transition: 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+
+      font-family: "Roboto Mono", monospace;
+      font-size: 18px;
+      font-weight: 500;
+      font-style: normal;
+      color: var(--white);
+    }
+  }
+}
+
+.formControl {
+  input {
+    &:focus+label span,
+    &:valid+label span {
+      color: var(--yellow);
+      transform: translateY(-30px);
+    }
+  }
+}

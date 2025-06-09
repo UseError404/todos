@@ -1,0 +1,71 @@
+.popup {
+  min-width: 320px;
+  height: 300px;
+  width: 80%;
+  background-color: var( --bg-color1);
+  border: 2px solid var( --yellow);
+  backdrop-filter: blur(200px);
+  box-shadow:
+  rgba(0, 0, 0, 0.17) 0px -23px 25px 0px inset,
+  rgba(0, 0, 0, 0.15) 0px -36px 30px 0px inset,
+  rgba(0, 0, 0, 0.1) 0px -79px 40px 0px inset;
+  border-radius: 20px;
+  padding: 20px;
+  z-index: 1;
+
+  position: absolute;
+  top: 10%;
+  left: 50%;
+  transform: translateX(-50%);
+}
+.content {
+  padding: 10px 20px;
+  position: relative;
+}
+.dataTask {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  margin-bottom: 25px;
+}
+
+.closePopup {
+  position: absolute;
+  top: 10px;
+  right: 20px;
+
+  width: 24px;
+  height: 24px;
+
+  transition: all .3s ease;
+  cursor: pointer;
+
+  &:hover{
+    transform: scale(1.1);
+  }
+
+  span{
+    display: block;
+    background-color: var(--yellow);
+    border-radius: 2px;
+    position: absolute;
+    transform: rotate(45deg);
+
+    &:first-child {
+      top: 0;
+      right: 50%;
+      transform: translateX(-50%) rotate(45deg);
+
+      height: 24px;
+      width: 3px;
+    }
+    &:last-child {
+      right: 0;
+      top: 50%;
+      transform: translateY(-50%) rotate(45deg);
+
+      height: 3px;
+      width: 24px;
+    }
+  }
+}

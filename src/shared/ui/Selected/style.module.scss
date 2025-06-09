@@ -1,0 +1,72 @@
+.customSelect {
+  position: relative;
+  display: inline-block;
+}
+
+.colorIndicator {
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  cursor: pointer;
+  border: 2px solid #eee;
+  transition: all 0.3s ease;
+
+  &:hover {
+    transform: scale(1.1);
+  }
+
+  &.green {background-color: var(--green);}
+  &.yellow {background-color: var(--yellow);}
+  &.red {background-color: var(--red);}
+  &.blue {background-color: var(--blue);}
+}
+
+.dropdown {
+  position: absolute;
+  top: 40px;
+  left: 0;
+  z-index: 2;
+  min-width: 300px;
+
+  background: var(--white);
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+.option {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 8px 12px;
+  cursor: pointer;
+
+  &:not(:last-child){
+    border-bottom: 1px solid var(--dark);
+  }
+
+  &:hover {
+    background-color: #f5f5f5;
+  }
+}
+
+.optionColor {
+  padding: 5px;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  border: 1px solid var(--black);
+
+
+  &.green {background-color: var(--green);}
+  &.yellow {background-color: var(--yellow);}
+  &.red {background-color: var(--red);}
+  &.blue {background-color: var(--blue);}
+}
+
+.label {
+  font-family: "Roboto Mono", monospace;
+  color: var(--dark);
+  font-size: 12px;
+  font-weight: 400;
+}

@@ -1,0 +1,91 @@
+.button {
+  position: relative;
+  display: inline-block;
+  cursor: pointer;
+  outline: none;
+  vertical-align: middle;
+  text-decoration: none;
+  background-color: var(--yellow);
+  border: 3px solid var(--yellow);
+  box-shadow: 0 3px 4px 0 rgba(0, 0, 0, 0.5);
+  padding: 0;
+  border-radius: 25px;
+  min-width: 12rem;
+  height: auto;
+
+  &:hover {
+    .circle {
+      width: 100%;
+      box-shadow: rgba(0, 0, 0, 0.06) 0px 2px 4px 0px inset;
+      .icon.arrow {
+        background: var(--yellow);
+        transform: translate(1rem, 0);
+      }
+    }
+    .buttonText {
+      color: var(--yellow);
+    }
+  }
+
+  .circle {
+    transition: all 0.45s cubic-bezier(0.65, 0, 0.076, 1);
+    position: relative;
+    display: block;
+    margin: 0;
+    width: 3rem;
+    height: 3rem;
+    background: #282936;
+    border-radius: 1.625rem;
+  }
+
+  .icon {
+    transition: all 0.45s cubic-bezier(0.65, 0, 0.076, 1);
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    margin: auto;
+    background: #fff;
+  }
+
+  .arrow {
+    transition: all 0.45s cubic-bezier(0.65, 0, 0.076, 1);
+    left: 0.625rem;
+    width: 1.125rem;
+    height: 0.125rem;
+    background: none;
+
+    &::before {
+      position: absolute;
+      content: "";
+      top: -0.25rem;
+      right: -0.05rem;
+      width: 0.625rem;
+      height: 0.625rem;
+      border-top: 0.125rem solid var(--yellow);
+      border-right: 0.125rem solid var(--yellow);
+      transform: rotate(45deg);
+    }
+  }
+
+  .buttonText {
+    transition: all 0.45s cubic-bezier(0.65, 0, 0.076, 1);
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+
+    padding: 0.75rem 0;
+    margin: 0 0 0 1.85rem;
+    font-family: "Roboto Mono", monospace;
+    color: var(--dark);
+    font-size: 18px;
+    font-weight: 700;
+    text-align: center;
+    text-transform: uppercase;
+  }
+}
+
+.deleteTask {
+  z-index: 2;
+}

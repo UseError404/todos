@@ -1,0 +1,30 @@
+// ==== Color ==== //
+:root {
+  --bg-color1: #1F1F1F;
+  --bg-color2: #E59313;
+  --bg-svg: #1F1F1F;
+
+  --white: #fff;
+  --dark: #2A2A2A;
+  --opasityDrk: rgba(42, 42, 42, 0.75);
+
+  --red: #ff0000;
+  --yellow: #F3B315;
+  --green: #00B437;
+  --blue: #0051FF;
+}
+
+[data-theme='dark'] {
+  --bg-color1: #1F1F1F;
+  --bg-color2: #2A2A2A;
+  --bg-svg: #E59313;
+}
+
+// ===== Breakpoints ===== //
+$breakpoints: (
+        'sm': 576px,
+        'md': 768px,
+        'lg': 992px,
+        'xl': 1440px,
+        'xxl': 1600px,
+);
