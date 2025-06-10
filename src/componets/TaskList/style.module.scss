@@ -64,6 +64,7 @@
     display: flex;
     align-items: center;
     gap: 15px;
+    width: 100%;
   }
 
   .taskPriority {
@@ -124,7 +125,7 @@
   font-size: 0.8rem;
   color: var(--yellow);
   margin-top: 4px;
-  width: 100%;
+  width: 15rem;
 
   transition: all .3s ease;
   @media (max-width: map-get(var.$breakpoints, 'md')) {
