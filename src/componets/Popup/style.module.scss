@@ -69,3 +69,22 @@
     }
   }
 }
+
+.formGroup {
+  cursor: pointer;
+  background-color: var(--yellow);
+  padding: 5px 8px;
+  border-radius: 5px;
+
+  font-family: "Roboto Mono", monospace;
+  color: var(--dark);
+  font-size: 12px;
+  font-weight: 500;
+
+  border: 2px solid var(--yellow);
+
+  input {
+    opacity: 0;
+    position: absolute;
+  }
+}

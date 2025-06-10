@@ -2,6 +2,7 @@
   position: relative;
   margin: 20px 0 40px;
   min-width: 190px;
+  width: 100%;
 
   .input {
     background-color: transparent;
@@ -9,7 +10,7 @@
     border-bottom: 2px var(--white) solid;
     display: block;
     padding: 15px 0;
-    //width: 100%;
+    width: 100%;
 
     font-family: "Roboto Mono", monospace;
     font-size: 18px;
@@ -46,8 +47,8 @@
 
 .formControl {
   input {
-    &:focus+label span,
-    &:valid+label span {
+    &:focus + label span,
+    &:valid + label span {
       color: var(--yellow);
       transform: translateY(-30px);
     }

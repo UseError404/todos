@@ -22,6 +22,10 @@ body{
     padding: 20px 20px;
   }
 
+  @media (max-width: map-get(var.$breakpoints, 'sm')) {
+    padding: 15px 10px;
+  }
+
   &::after,
   &::before {
     content: '';
@@ -70,6 +74,13 @@ body{
   border-radius: 20px;
   border: 1px solid rgba(255, 255, 255, 0.18);
   padding: 20px;
+
+  @media (max-width: map-get(var.$breakpoints, 'lg')) {
+    gap: 20px;
+  }
+  @media (max-width: map-get(var.$breakpoints, 'sm')) {
+    padding: 15px 10px;
+  }
 }
 
 .openPopup {

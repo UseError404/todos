@@ -19,6 +19,7 @@
     border-radius: 20px;
     box-shadow: -3px -3px 6px 0 rgba(0, 0, 0, 0.3);
     background-color: var(--opasityDrk);
+    transition: all .3s ease;
 
     font-family: "Roboto Mono", monospace;
     color: var(--dark);
@@ -29,12 +30,40 @@
       flex-direction: column;
       align-items: flex-start;
     }
+
+    @media (max-width: map-get(var.$breakpoints, 'sm')) {
+      padding: 15px 10px;
+    }
   }
 
-  .containerTask {
+  /* Стили для просроченных задач */
+  .taskItem[data-overdue="true"] {
+    border-right: 1px solid #ff4d4d;
+  }
+
+  /* Стили для срочных задач */
+  .taskItem[data-priority="1"] {
+    animation: pulse 2s infinite;
+  }
+
+  .taskContainer {
     display: flex;
     align-items: center;
+    justify-content: space-between;
     gap: 20px;
+
+    width: 100%;
+    transition: all .3s ease;
+
+    @media (max-width: map-get(var.$breakpoints, 'md')) {
+      flex-wrap: wrap;
+    }
+  }
+
+  .taskMainData {
+    display: flex;
+    align-items: center;
+    gap: 15px;
   }
 
   .taskPriority {
@@ -73,7 +102,7 @@
     font-weight: 400;
 
     overflow-wrap: anywhere;
-    max-width: 500px;
+    max-width: 100%;
   }
 }
 
@@ -88,4 +117,23 @@
 }
 
 .deleteTask {
+}
+.dueDate {
+  display: flex;
+  justify-content: flex-end;
+  font-size: 0.8rem;
+  color: var(--yellow);
+  margin-top: 4px;
+  width: 100%;
+
+  transition: all .3s ease;
+  @media (max-width: map-get(var.$breakpoints, 'md')) {
+    width: 100%;
+  }
+}
+
+@keyframes pulse {
+  0% { box-shadow: 0 0 0 0 rgba(243, 179, 21, 0.9); }
+  80% { box-shadow: 0 0 0 10px rgba(243, 179, 21, 0); }
+  100% { box-shadow: 0 0 0 0 rgba(243, 179, 21, 0); }
 }

@@ -1,4 +1,4 @@
-import {useState} from "react";
+import {useRef, useState} from "react";
 import {useDispatch, useSelector} from "react-redux";
 
 import {Button, Input, SelectPriority, SwitchToggle} from "../../shared/ui";
@@ -9,32 +9,49 @@ import style from './style.module.scss';
 export const Popup = ({handleTogglePopup, setTogglePopup}) => {
     const dispatch = useDispatch();
     const userId = useSelector(state => state.auth.userId);
-    // настройка input
-    const [textInput, setInputText] = useState('');
+    const [dueDate, setDueDate] = useState(''); // становка даты окончания задачи
+    const [textInput, setInputText] = useState('');  // настройка input
+    // const [priority, setPriority] = useState(''); // настройка select (отображение приоритета задачи)
+    const [switchToggle, setSwitchToggle] = useState(false); // настройка switchToggle (если true, то popup не будет закрыт автоматически)
+    const dateInputRef = useRef(null); // Создаем ref для input
 
-    // настройка select (отображение приоритета задачи)
-    const [priority, setPriority] = useState('');
-
-    // настройка switchToggle (если true, то popup не будет закрыт автоматически)
-    const [switchToggle, setSwitchToggle] = useState(false);
+    // Функция для открытия календаря
+    const handleOpenDatePicker = () => {
+        if (dateInputRef.current) {
+            // Проверяем поддержку showPicker (новый API)
+            if ('showPicker' in HTMLInputElement.prototype) {
+                dateInputRef.current.showPicker();
+            } else {
+                // Fallback для старых браузеров
+                dateInputRef.current.click();
+            }
+        }
+    };
+    // (если true, то popup не будет закрыт автоматически)
     const handleToggleSwitch = () => {
         setSwitchToggle(!switchToggle);
-        console.log(switchToggle)
     }
 
     // отправка данных в store
     const handleDispatchTask = () => {
         if (textInput.trim() === '') return; // проверка на пустой ввод
+        // Проверка, что дата выбрана
+        const today = new Date().toISOString().split('T')[0];
+        if (!dueDate || dueDate < today) {
+            alert('Please select a valid future date');
+            return;
+        }
 
         const newTask = {
             name: textInput,
-            priority: priority,
+            dueDate,
             userId
         }
 
         dispatch(addTask(newTask));
         setInputText(''); // обнуление input
-        setPriority('') // обнуление select
+        // setPriority('') // обнуление select
+        setDueDate(''); // обнуление даты, если нужно
 
         if (switchToggle === false) {
             setTimeout(() => handleTogglePopup(), 300)
@@ -49,13 +66,37 @@ export const Popup = ({handleTogglePopup, setTogglePopup}) => {
         <div className={style.popup}>
             <div className={style.content}>
                 <SwitchToggle handleToggleSwitch={handleToggleSwitch}/>
-                <button className={style.closePopup} onClick={()=>handleClosePopup()}>
+                <button className={style.closePopup} onClick={() => handleClosePopup()}>
                     <span></span>
                     <span></span>
                 </button>
                 <div className={style.dataTask}>
-                    <SelectPriority priority={priority} setPriority={setPriority}/>
+                    <SelectPriority
+                        // priority={priority} setPriority={setPriority}
+                    />
+
                     <Input textInput={textInput} setInputText={setInputText}/>
+
+                    <div
+                        className={style.formGroup}
+                        onClick={handleOpenDatePicker} // Вешаем обработчик на клик
+                    >
+                        <label htmlFor="dueDate">Due Date</label>
+                        <input
+                            id="dueDate"
+                            ref={dateInputRef}
+                            type="date"
+                            lang="en-US"
+                            value={dueDate}
+                            onChange={(e) => setDueDate(e.target.value)}
+                            min={new Date().toISOString().split('T')[0]}
+                            style={{ opacity: 0, position: "absolute" }}
+                        />
+
+                        {dueDate && (
+                            <span>{new Date(dueDate).toLocaleDateString()}</span>
+                        )}
+                    </div>
                 </div>
                 <Button handleFunction={handleDispatchTask} textButton='Add Task'/>
             </div>

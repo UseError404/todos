@@ -3,8 +3,8 @@ import style from './style.module.scss';
 
 export const SelectPriority = ({priority, setPriority}) => {
     const [isOpen, setIsOpen] = useState(false);
-    const [selectedValue, setSelectedValue] = useState(priority);
     const dropdownRef = useRef(null);
+    // const [selectedValue, setSelectedValue] = useState(priority);
 
     const options = [
         {value: "1", label: "It's important and urgent", color: style.red},
@@ -14,14 +14,14 @@ export const SelectPriority = ({priority, setPriority}) => {
     ];
 
     const handleSelect = (value) => {
-        setSelectedValue(value);
+        // setSelectedValue(value);
         setPriority(value);
         setIsOpen(false);
     };
 
-    useEffect(() => {
-        setSelectedValue(priority);
-    }, [priority]);
+    // useEffect(() => {
+    //     setSelectedValue(priority);
+    // }, [priority]);
 
     useEffect(() => {
         const handleClickOutside = (event) => {
@@ -38,12 +38,13 @@ export const SelectPriority = ({priority, setPriority}) => {
         return ()=>document.removeEventListener('mousedown', handleClickOutside);
     }, [isOpen])
 
-    const selectedOption = options.find(opt => opt.value === selectedValue);
+    // const selectedOption = options.find(opt => opt.value === selectedValue);
 
     return (
         <div className={style.customSelect} ref={dropdownRef}>
             <div
-                className={`${style.colorIndicator} ${selectedOption?.color || ''}`}
+                // className={`${style.colorIndicator} ${selectedOption?.color || ''}`}
+                className={style.colorIndicator}
                 onClick={() => setIsOpen(!isOpen)}
             />
 
