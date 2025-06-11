@@ -1,17 +1,20 @@
-import {useEffect} from "react";
+import {memo, useEffect} from "react";
 import {useDispatch, useSelector} from "react-redux";
 
 import {loadTasks, removeTask, updateTaskPriority} from "../../redux/slice/todoSlice.js";
-import {setSortOrder} from "../../redux/slice/sortSlice.js";
+import {selectSortedTasks, setSortOrder} from "../../redux/slice/sortSlice.js";
 
 import {Button} from "../../shared/ui/index.jsx";
 import style from './style.module.scss';
 
-export const TaskList = () => {
+export const TaskList = memo(() => {
     const dispatch = useDispatch();
+
     const tasks = useSelector(state => state.todos.items);
     const userId = useSelector(state => state.auth.userId);
     const sortOrder = useSelector(state => state.sort.sortOrder);
+
+    const sortedTasks = useSelector(selectSortedTasks);  // Функция сортировки задач
 
     useEffect(() => {
         if (userId) {
@@ -27,16 +30,7 @@ export const TaskList = () => {
         return () => clearInterval(interval);
     }, [dispatch]);
 
-    // Функция сортировки задач
-    const sortedTasks = [...tasks].sort((a, b) => {
-        // Задачи без приоритета идут в конец
-        if (!a.priority) return 1;
-        if (!b.priority) return -1;
 
-        return sortOrder === 'asc'
-            ? a.priority.localeCompare(b.priority)
-            : b.priority.localeCompare(a.priority);
-    });
 
     // отправка action на сортировку
     const toggleSortOrder = () => {
@@ -106,4 +100,4 @@ export const TaskList = () => {
             </ul>
         </>
     );
-};
+});
