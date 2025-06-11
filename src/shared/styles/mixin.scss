@@ -1,3 +1,4 @@
+
 /// Адаптивный текст с автоматической линией высоты
 /// @param {Number} $min-size - Минимальный размер (px)
 /// @param {Number} $max-size - Максимальный размер (px)
@@ -29,4 +30,10 @@
 // Вспомогательная функция для удаления единиц измерения
 @function strip-unit($value) {
   @return $value / ($value * 0 + 1);
+}
+
+//EM
+@function em($px, $current: 16) {
+  $result: math.div($px, $current) + em;
+  @return $result;
 }

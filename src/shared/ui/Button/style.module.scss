@@ -1,3 +1,5 @@
+@import "../../styles/mixin";
+
 .button {
   position: relative;
   display: inline-block;
@@ -80,7 +82,7 @@
 
     font-family: "Roboto Mono", monospace;
     color: var(--dark);
-    font-size: 18px;
+    font-size: 1rem;
     font-weight: 700;
     text-align: center;
     text-transform: uppercase;

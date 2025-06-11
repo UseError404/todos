@@ -4,7 +4,6 @@ export const Button = ({handleFunction, textButton, className}) => {
     return (
         <button className={`${style.button} ${className || ''}`}
                 onClick={(e) => {
-                    // e.stopPropagation();
                     handleFunction();
                 }}
         >
