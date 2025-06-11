@@ -2,10 +2,12 @@ import {memo, useEffect} from "react";
 import {useDispatch, useSelector} from "react-redux";
 
 import {loadTasks, removeTask, updateTaskPriority} from "../../redux/slice/todoSlice.js";
-import {selectSortedTasks, setSortOrder} from "../../redux/slice/sortSlice.js";
+import {setSortOrder} from "../../redux/slice/sortSlice.js";
 
 import {Button} from "../../shared/ui/index.jsx";
 import style from './style.module.scss';
+import {getPriorityColor} from "../../shared/utills/getPriorityColor.js";
+import {selectSortedTasks} from "../../redux/slice/selectors.js";
 
 export const TaskList = memo(() => {
     const dispatch = useDispatch();
@@ -38,22 +40,6 @@ export const TaskList = memo(() => {
         dispatch(setSortOrder(newOrder));
     };
 
-    // сортировка приоритетности задач
-    // без приоритета - в конец списка
-    const getPriorityColor = (priority) => {
-        switch (priority) {
-            case '1':
-                return style.red;
-            case '2':
-                return style.yellow;
-            case '3':
-                return style.green;
-            case '4':
-                return style.blue;
-            default:
-                return '';
-        }
-    };
 
     // удаление такска по id
     const handleDeleteTask = ({id}) => {

@@ -16,7 +16,7 @@ const authSlice = createSlice({
             state.userId = null;
             localStorage.removeItem('userId');
             // Очищаем задачи при выходе (опционально)
-            localStorage.removeItem(`todos_${state.userId}`);
+            localStorage.removeItem(`todos_${localStorage.getItem('userId')}`);
         }
     }
 });

@@ -1,7 +1,7 @@
 import {useRef, useState} from "react";
 import {useDispatch, useSelector} from "react-redux";
 
-import {Button, Input, SelectPriority, SwitchToggle} from "../../shared/ui";
+import {Button, Input, SwitchToggle} from "../../shared/ui";
 import {addTask} from "../../redux/slice/todoSlice.js";
 
 import style from './style.module.scss';
@@ -11,7 +11,6 @@ export const Popup = ({handleTogglePopup, setTogglePopup}) => {
     const userId = useSelector(state => state.auth.userId);
     const [dueDate, setDueDate] = useState(''); // становка даты окончания задачи
     const [textInput, setInputText] = useState('');  // настройка input
-    // const [priority, setPriority] = useState(''); // настройка select (отображение приоритета задачи)
     const [switchToggle, setSwitchToggle] = useState(false); // настройка switchToggle (если true, то popup не будет закрыт автоматически)
     const dateInputRef = useRef(null); // Создаем ref для input
 
@@ -50,7 +49,6 @@ export const Popup = ({handleTogglePopup, setTogglePopup}) => {
 
         dispatch(addTask(newTask));
         setInputText(''); // обнуление input
-        // setPriority('') // обнуление select
         setDueDate(''); // обнуление даты, если нужно
 
         if (switchToggle === false) {
@@ -71,12 +69,7 @@ export const Popup = ({handleTogglePopup, setTogglePopup}) => {
                     <span></span>
                 </button>
                 <div className={style.dataTask}>
-                    <SelectPriority
-                        // priority={priority} setPriority={setPriority}
-                    />
-
                     <Input textInput={textInput} setInputText={setInputText}/>
-
                     <div
                         className={style.formGroup}
                         onClick={handleOpenDatePicker} // Вешаем обработчик на клик

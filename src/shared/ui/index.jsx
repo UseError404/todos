@@ -1,5 +1,4 @@
 export {Button} from './Button'
 export {Input} from './Input'
-export {SelectPriority} from './Selected'
 export {ThemeToggle} from './ThemeToggle'
 export {SwitchToggle} from './SwitchToggle'
